@@ -37,6 +37,6 @@ const watchlistSchema = new mongoose.Schema({
 });
 
 // Create the Watchlist Model
-const WatchlistModel = mongoose.models.Watchlist ||mongoose.model('Watchlist', watchlistSchema);
+const WatchlistModel = mongoose.model('Watchlist', watchlistSchema);
 
 module.exports = WatchlistModel;
