@@ -22,7 +22,9 @@ app.use('/api/auth', authRoutes);
 app.use('/api/watchlist', watchlistRoutes);
 
 app.get('/', (req, res) => {
-    res.sendStatus(200);
+    res.sendStatus(200).json({
+        message: 'Welcome to Movie API',
+    });
 })
 
 module.exports = app;
