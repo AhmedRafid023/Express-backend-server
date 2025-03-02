@@ -21,7 +21,7 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/watchlist', watchlistRoutes);
 
-app.get('/', (req, res) => {
+app.get('/test', (req, res) => {
     res.sendStatus(200).json({
         message: 'Welcome to Movie API',
     });
