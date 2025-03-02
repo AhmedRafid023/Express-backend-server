@@ -1,12 +1,13 @@
-const knex = require('knex')({
-    client: 'mysql2', // Using mysql2 as the database client
-    connection: {
-        host: process.env.DB_HOST,
-        user: process.env.DB_USER,
-        password: process.env.DB_PASSWORD,
-        database: process.env.DB_NAME,
-    },
-    pool: { min: 2, max: 10 }, // Connection pool settings
-});
+const mongoose = require('mongoose');
 
-module.exports = knex;
+const connectDB = async () => {
+    try {
+        const conn = await mongoose.connect(process.env.MONGO_URI);
+        console.log(`MongoDB Connected: ${conn.connection.host}`);
+    } catch (error) {
+        console.error(`Error connecting to MongoDB: ${error.message}`);
+        process.exit(1); // Exit the process if the connection fails
+    }
+};
+
+module.exports = connectDB;

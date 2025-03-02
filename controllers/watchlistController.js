@@ -1,6 +1,4 @@
-const router = require("../routes/authRoutes");
-const Watchlist = require("../models/watchlist");
-
+const WatchlistService = require('../services/WatchlistService');
 
 const createWatchlist = async (req, res) => {
     const { user_id, tmdb_id, media_type, title, poster_path, backdrop_path, extra_details } = req.body;
@@ -11,7 +9,7 @@ const createWatchlist = async (req, res) => {
 
     try {
         // Add to watchlist
-        const watchlistItem = await Watchlist.addToWatchlist(
+        const watchlistItem = await WatchlistService.addToWatchlist(
             user_id, tmdb_id, media_type, title, poster_path, backdrop_path, extra_details
         );
 
@@ -29,7 +27,7 @@ const isInWatchlist = async (req, res) => {
     }
 
     try {
-        const exist = await Watchlist.isInWatchlist(user_id, tmdb_id, media_type);
+        const exist = await WatchlistService.isInWatchlist(user_id, tmdb_id, media_type);
         console.log(exist);
         res.status(200).json({ inWatchlist: exist }); // Always return a response
     } catch (error) {
@@ -42,7 +40,7 @@ const list_data = async (req, res) => {
 
     try {
         // Fetch the user's watchlist from the database
-        const watchlist = await Watchlist.getWatchlist(userId);
+        const watchlist = await WatchlistService.getWatchlist(userId);
 
         // Return the watchlist data in the response
         res.status(200).json({ watchlist });
@@ -57,7 +55,7 @@ const deleteWatchlist = async (req, res) => {
 
     try {
         // Remove the item from the watchlist
-        const result = await Watchlist.removeFromWatchlist(user_id, tmdb_id, media_type);
+        const result = await WatchlistService.removeFromWatchlist(user_id, tmdb_id, media_type);
 
         // Check if the item was deleted
         if (result === 0) {

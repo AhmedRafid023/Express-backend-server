@@ -1,16 +1,23 @@
-const db = require('../config/db');
+const mongoose = require('mongoose');
 
-class User {
-    static async create(user) {
-        const { name, email, password } = user;
-        const [result] = await db('users').insert({ name, email, password }).returning('*');
-        return result;
-    }
+const userSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    password: {
+        type: String,
+        required: true,
+    },
+}, {
+    timestamps: true, // Adds createdAt and updatedAt fields
+});
 
-    static async findByEmail(email) {
-        const rows = await db('users').select('*').where({ email });
-        return rows[0]; // Return the first matching user
-    }
-}
+const User = mongoose.model('User', userSchema);
 
 module.exports = User;
