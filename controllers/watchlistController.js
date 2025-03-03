@@ -2,7 +2,7 @@ const WatchlistService = require('../services/WatchlistService');
 const jwt = require("jsonwebtoken");
 
 const createWatchlist = async (req, res) => {
-    const { user_id, tmdb_id, media_type, title, poster_path, backdrop_path, extra_details } = req.body;
+    const { user_id, tmdb_id, media_type, title, poster_path, backdrop_path, rating, extra_details } = req.body;
 
     if (!user_id || !tmdb_id || !media_type || !title) {
         return res.status(400).json({ message: "Missing required fields" });
@@ -11,7 +11,7 @@ const createWatchlist = async (req, res) => {
     try {
         // Add to watchlist
         const watchlistItem = await WatchlistService.addToWatchlist(
-            user_id, tmdb_id, media_type, title, poster_path, backdrop_path, extra_details
+            user_id, tmdb_id, media_type, title, poster_path, backdrop_path, rating, extra_details
         );
 
         res.status(201).json({ message: "Added to watchlist", watchlistItem });

@@ -28,6 +28,12 @@ const watchlistSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    rating: {
+        type: Number,
+        default: null, // Default value if no rating is provided
+        min: 0, // Minimum rating value
+        max: 10, // Maximum rating value
+    },
     extra_details: {
         type: Object,
         default: {},

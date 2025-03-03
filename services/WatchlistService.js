@@ -12,7 +12,7 @@ class WatchlistService {
      * @param {object} extraDetails - Additional details about the media item.
      * @returns {Promise<object>} - The newly created watchlist item.
      */
-    static async addToWatchlist(userId, tmdbId, mediaType, title, posterPath, backdropPath, extraDetails = {}) {
+    static async addToWatchlist(userId, tmdbId, mediaType, title, posterPath, backdropPath, rating , extraDetails = {}) {
         const watchlistItem = new WatchlistModel({
             user_id: userId,
             tmdb_id: tmdbId,
@@ -20,6 +20,7 @@ class WatchlistService {
             title,
             poster_path: posterPath,
             backdrop_path: backdropPath,
+            rating: rating,
             extra_details: extraDetails,
         });
         return await watchlistItem.save();
