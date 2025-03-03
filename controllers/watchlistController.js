@@ -1,4 +1,5 @@
 const WatchlistService = require('../services/WatchlistService');
+const jwt = require("jsonwebtoken");
 
 const createWatchlist = async (req, res) => {
     const { user_id, tmdb_id, media_type, title, poster_path, backdrop_path, extra_details } = req.body;
@@ -39,6 +40,18 @@ const list_data = async (req, res) => {
     const { userId } = req.params;
 
     try {
+        const authHeader = req.headers['authorization'];
+        if( !authHeader || !authHeader.startsWith('Bearer ')) {
+            return res.status(401).json({ message: "Missing authorization header" });
+        }
+
+        const token = authHeader.split(' ')[1];
+        const decode = jwt.verify(token, process.env.JWT_SECRET);
+
+        if(decode.userId !== userId) {
+            return res.status(401).json({message: "Invalid Token"});
+        }
+
         // Fetch the user's watchlist from the database
         const watchlist = await WatchlistService.getWatchlist(userId);
 
