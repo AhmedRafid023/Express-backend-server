@@ -17,7 +17,7 @@ This is the backend server for the **Matrix** movie website, built using **Node.
 
 Clone the repository:
 ```sh
-git clone https://github.com/AhmedRafid023/matrix-backend.git
+git clone https://github.com/AhmedRafid023/Express-backend-server.git
 cd matrix-backend
 ```
 
