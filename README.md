@@ -44,14 +44,10 @@ npm run devStart
 - `POST /api/auth/register` - Register a new user
 - `POST /api/auth/login` - Login and get JWT token
 
-### Movies
-- `GET /api/movies` - Fetch all movies
-- `GET /api/movies/:id` - Get details of a specific movie
-
 ### User Watchlist
-- `POST /api/watchlist` - Add a movie to watchlist
-- `GET /api/watchlist` - Get user’s watchlist
-- `DELETE /api/watchlist/:id` - Remove a movie from watchlist
+- `POST /api/watchlist/add` - Add a movie to watchlist
+- `GET /api/watchlist/:userId` - Get user’s watchlist
+- `DELETE /api/watchlist/remove` - Remove a movie from watchlist
 
 ## 🤝 Contributing
 Contributions are welcome! Feel free to fork the project and submit a PR.
