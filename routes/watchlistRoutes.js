@@ -1,8 +1,10 @@
 const express = require('express');
-const watchlistController = require('../controllers/watchlistController');
+const WatchlistController = require('../controllers/WatchlistController');
+const WatchlistService = require('../services/WatchlistService');
 
 const router = express.Router();
 
+watchlistController = new WatchlistController(WatchlistService);
 
 router.post('/add', watchlistController.createWatchlist);
 router.post('/check', watchlistController.isInWatchlist);
