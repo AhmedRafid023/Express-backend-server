@@ -49,20 +49,8 @@ class WatchlistController {
     };
 
     async list_data(req, res){
-        const {userId} = req.params;
-
         try {
-            const authHeader = req.headers['authorization'];
-            if (!authHeader || !authHeader.startsWith('Bearer ')) {
-                return res.status(401).json({message: "Missing authorization header"});
-            }
-
-            const token = authHeader.split(' ')[1];
-            const decode = jwt.verify(token, process.env.JWT_SECRET);
-
-            if (decode.userId !== userId) {
-                return res.status(401).json({message: "Invalid Token"});
-            }
+            const userId = req.user.userId;
 
             // Fetch the user's watchlist from the database
             const watchlist = await this.watchlistService.getWatchlist(userId);
