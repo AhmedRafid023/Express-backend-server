@@ -64,9 +64,14 @@ class WatchlistController {
     };
 
     async deleteWatchlist(req, res){
-        const {user_id, tmdb_id, media_type} = req.body;
+        const {tmdb_id, media_type} = req.body;
+
+        if (!tmdb_id || !media_type) {
+            return res.status(400).json({message: "Missing required fields"});
+        }
 
         try {
+            const user_id = req.user.userId;
             // Remove the item from the watchlist
             const result = await this.watchlistService.removeFromWatchlist(user_id, tmdb_id, media_type);
 

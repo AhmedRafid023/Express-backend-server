@@ -10,6 +10,6 @@ watchlistController = new WatchlistController(WatchlistService);
 router.post('/add', watchlistController.createWatchlist);
 router.post('/check', watchlistController.isInWatchlist);
 router.get('/', authMiddleware, watchlistController.list_data);
-router.delete('/remove', watchlistController.deleteWatchlist);
+router.delete('/remove', authMiddleware, watchlistController.deleteWatchlist);
 
 module.exports = router;
