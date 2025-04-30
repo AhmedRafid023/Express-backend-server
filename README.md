@@ -47,7 +47,7 @@ npm run devStart
 ### User Watchlist
 - `POST /api/watchlist/add` - Add a movie to watchlist
 - `GET /api/watchlist/check` - Check if it's already in the watchlist
-- `GET /api/watchlist/:userId` - Get user’s watchlist
+- `GET /api/watchlist` - Get user’s watchlist
 - `DELETE /api/watchlist/remove` - Remove a movie from watchlist
 
 ## 🤝 Contributing
